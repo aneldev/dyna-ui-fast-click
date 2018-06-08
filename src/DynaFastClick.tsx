@@ -2,6 +2,7 @@ import * as React from "react";
 
 export interface IDynaFastClickProps {
 	className?: string;
+	nodeType?: string;
 	touchTimeout?: number; // ms
 	children: any;
 	onClick?: () => void;
@@ -12,6 +13,7 @@ const CONSOLE_DEBUG: boolean = false;
 export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 	static defaultProps: IDynaFastClickProps = {
 		className: "",
+		nodeType: "span",
 		touchTimeout: 120,
 		children: null,
 		onClick: () => undefined,
@@ -74,6 +76,7 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 	public render(): JSX.Element {
 		const {
 			className: userClassName,
+			nodeType: NodeType,
 			children,
 		} = this.props;
 
@@ -83,7 +86,7 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 		].join(' ').trim();
 
 		return (
-			<span
+			<NodeType
 				className={className}
 				onClick={this.handleClick}
 				onTouchStart={this.handleTouchStart}
@@ -92,7 +95,7 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 				onTouchCancel={this.handleTouchCancel}
 			>
 				{children}
-			</span>
+			</NodeType>
 		);
 	}
 }
