@@ -114,7 +114,7 @@ var DynaFastClick = /** @class */ (function (_super) {
     __extends(DynaFastClick, _super);
     function DynaFastClick(props) {
         var _this = _super.call(this, props) || this;
-        _this.baseClassName = "my-button";
+        _this.baseClassName = "dyna-fast-click";
         _this.className = function (subClassName, active) {
             if (subClassName === void 0) { subClassName = ""; }
             if (active === void 0) { active = true; }
