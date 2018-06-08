@@ -28,9 +28,6 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 		this.handleTouchCancel = this.handleTouchCancel.bind(this);
 	}
 
-	private readonly baseClassName: string = "dyna-fast-click";
-	private readonly className = (subClassName: string = "", active: boolean = true): string => active ? `${this.baseClassName}${subClassName}` : "";
-
 	private touchStartTimer: any;
 	private touchApplied: boolean = false;
 	private touchEnded: number;
@@ -75,15 +72,10 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 
 	public render(): JSX.Element {
 		const {
-			className: userClassName,
+			className,
 			nodeType: NodeType,
 			children,
 		} = this.props;
-
-		const className: string = [
-			userClassName,
-			this.className(),
-		].join(' ').trim();
 
 		return (
 			<NodeType
