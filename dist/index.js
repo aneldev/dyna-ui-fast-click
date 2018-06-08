@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("react"));
 	else if(typeof define === 'function' && define.amd)
-		define("dyna-fast-click", ["react"], factory);
+		define("dyna-ui-fast-click", ["react"], factory);
 	else if(typeof exports === 'object')
-		exports["dyna-fast-click"] = factory(require("react"));
+		exports["dyna-ui-fast-click"] = factory(require("react"));
 	else
-		root["dyna-fast-click"] = factory(root["react"]);
+		root["dyna-ui-fast-click"] = factory(root["react"]);
 })(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
