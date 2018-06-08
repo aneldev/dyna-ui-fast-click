@@ -28,7 +28,7 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 		this.handleTouchCancel = this.handleTouchCancel.bind(this);
 	}
 
-	private readonly baseClassName: string = "my-button";
+	private readonly baseClassName: string = "dyna-fast-click";
 	private readonly className = (subClassName: string = "", active: boolean = true): string => active ? `${this.baseClassName}${subClassName}` : "";
 
 	private touchStartTimer: any;
