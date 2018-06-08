@@ -1,6 +1,6 @@
 {
   "name": "dyna-ui-fast-click",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "React fast click wrapper for an element",
   "repository": {
     "type": "git",
