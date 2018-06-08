@@ -1,6 +1,7 @@
 import * as React from "react";
 export interface IDynaFastClickProps {
     className?: string;
+    nodeType?: string;
     touchTimeout?: number;
     children: any;
     onClick?: () => void;

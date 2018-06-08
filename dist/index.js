@@ -168,15 +168,16 @@ var DynaFastClick = /** @class */ (function (_super) {
         clearTimeout(this.touchStartTimer);
     };
     DynaFastClick.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, children = _a.children;
+        var _a = this.props, userClassName = _a.className, NodeType = _a.nodeType, children = _a.children;
         var className = [
             userClassName,
             this.className(),
         ].join(' ').trim();
-        return (React.createElement("span", { className: className, onClick: this.handleClick, onTouchStart: this.handleTouchStart, onTouchEnd: this.handleTouchEnd, onTouchMove: this.handleTouchMove, onTouchCancel: this.handleTouchCancel }, children));
+        return (React.createElement(NodeType, { className: className, onClick: this.handleClick, onTouchStart: this.handleTouchStart, onTouchEnd: this.handleTouchEnd, onTouchMove: this.handleTouchMove, onTouchCancel: this.handleTouchCancel }, children));
     };
     DynaFastClick.defaultProps = {
         className: "",
+        nodeType: "span",
         touchTimeout: 120,
         children: null,
         onClick: function () { return undefined; },
