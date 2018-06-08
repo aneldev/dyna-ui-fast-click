@@ -9,8 +9,6 @@ export interface IDynaFastClickProps {
 export declare class DynaFastClick extends React.Component<IDynaFastClickProps> {
     static defaultProps: IDynaFastClickProps;
     constructor(props: IDynaFastClickProps);
-    private readonly baseClassName;
-    private readonly className;
     private touchStartTimer;
     private touchApplied;
     private touchEnded;

@@ -114,12 +114,6 @@ var DynaFastClick = /** @class */ (function (_super) {
     __extends(DynaFastClick, _super);
     function DynaFastClick(props) {
         var _this = _super.call(this, props) || this;
-        _this.baseClassName = "dyna-fast-click";
-        _this.className = function (subClassName, active) {
-            if (subClassName === void 0) { subClassName = ""; }
-            if (active === void 0) { active = true; }
-            return active ? "" + _this.baseClassName + subClassName : "";
-        };
         _this.touchApplied = false;
         _this.handleClick = _this.handleClick.bind(_this);
         _this.handleTouchStart = _this.handleTouchStart.bind(_this);
@@ -168,11 +162,7 @@ var DynaFastClick = /** @class */ (function (_super) {
         clearTimeout(this.touchStartTimer);
     };
     DynaFastClick.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, NodeType = _a.nodeType, children = _a.children;
-        var className = [
-            userClassName,
-            this.className(),
-        ].join(' ').trim();
+        var _a = this.props, className = _a.className, NodeType = _a.nodeType, children = _a.children;
         return (React.createElement(NodeType, { className: className, onClick: this.handleClick, onTouchStart: this.handleTouchStart, onTouchEnd: this.handleTouchEnd, onTouchMove: this.handleTouchMove, onTouchCancel: this.handleTouchCancel }, children));
     };
     DynaFastClick.defaultProps = {
