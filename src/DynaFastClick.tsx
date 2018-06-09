@@ -5,10 +5,8 @@ export interface IDynaFastClickProps {
 	nodeType?: string;
 	touchTimeout?: number; // ms
 	children: any;
-	onClick?: () => void;
+	onClick?: (event?: MouseEvent | TouchEvent) => void;
 }
-
-const CONSOLE_DEBUG: boolean = false;
 
 export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 	static defaultProps: IDynaFastClickProps = {
@@ -16,7 +14,7 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 		nodeType: "span",
 		touchTimeout: 120,
 		children: null,
-		onClick: () => undefined,
+		onClick: (event?: MouseEvent | TouchEvent) => undefined,
 	};
 
 	constructor(props: IDynaFastClickProps) {
@@ -30,44 +28,36 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 
 	private touchStartTimer: any;
 	private touchApplied: boolean = false;
-	private touchEnded: number;
+	private touchCanceled: boolean = false;
 
-	private triggerClick(): void {
-		this.props.onClick();
+	private triggerClick(event: MouseEvent | TouchEvent): void {
+		this.props.onClick(event);
 	}
 
-	private handleClick(): void {
-		if (CONSOLE_DEBUG) console.debug('handle - click');
+	private handleClick(event: MouseEvent): void {
 		if (this.touchApplied) {
 			this.touchApplied = false;
 			return;
 		}
 		this.touchApplied = false;
-		this.triggerClick();
+		this.triggerClick(event);
 	}
 
 	private handleTouchStart(): void {
-		if (CONSOLE_DEBUG) console.debug('this.props.touchTimeout',this.props.touchTimeout);
+		this.touchCanceled = false;
 		this.touchApplied = true;
-		this.touchStartTimer = setTimeout(() => {
-			this.triggerClick();
-		}, this.props.touchTimeout);
-		if (CONSOLE_DEBUG) console.debug('handle - start');
 	}
 
-	private handleTouchEnd(): void {
-		if (CONSOLE_DEBUG) console.debug('handle - end');
-		this.touchEnded = Number(new Date);
+	private handleTouchEnd(event: TouchEvent): void {
+		if (!this.touchCanceled) this.triggerClick(event);
 	}
 
 	private handleTouchMove(): void {
-		if (CONSOLE_DEBUG) console.debug('handle - move');
-		clearTimeout(this.touchStartTimer);
+		this.touchCanceled = true;
 	}
 
 	private handleTouchCancel(): void {
-		if (CONSOLE_DEBUG) console.debug('handle - cancel');
-		clearTimeout(this.touchStartTimer);
+		this.touchCanceled = true;
 	}
 
 	public render(): JSX.Element {

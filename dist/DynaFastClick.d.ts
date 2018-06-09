@@ -4,14 +4,14 @@ export interface IDynaFastClickProps {
     nodeType?: string;
     touchTimeout?: number;
     children: any;
-    onClick?: () => void;
+    onClick?: (event?: MouseEvent | TouchEvent) => void;
 }
 export declare class DynaFastClick extends React.Component<IDynaFastClickProps> {
     static defaultProps: IDynaFastClickProps;
     constructor(props: IDynaFastClickProps);
     private touchStartTimer;
     private touchApplied;
-    private touchEnded;
+    private touchCanceled;
     private triggerClick;
     private handleClick;
     private handleTouchStart;

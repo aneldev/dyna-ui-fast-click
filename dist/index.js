@@ -115,6 +115,7 @@ var DynaFastClick = /** @class */ (function (_super) {
     function DynaFastClick(props) {
         var _this = _super.call(this, props) || this;
         _this.touchApplied = false;
+        _this.touchCanceled = false;
         _this.handleClick = _this.handleClick.bind(_this);
         _this.handleTouchStart = _this.handleTouchStart.bind(_this);
         _this.handleTouchEnd = _this.handleTouchEnd.bind(_this);
@@ -122,10 +123,10 @@ var DynaFastClick = /** @class */ (function (_super) {
         _this.handleTouchCancel = _this.handleTouchCancel.bind(_this);
         return _this;
     }
-    DynaFastClick.prototype.triggerClick = function () {
-        this.props.onClick();
+    DynaFastClick.prototype.triggerClick = function (event) {
+        this.props.onClick(event);
     };
-    DynaFastClick.prototype.handleClick = function () {
+    DynaFastClick.prototype.handleClick = function (event) {
         if (CONSOLE_DEBUG)
             console.debug('handle - click');
         if (this.touchApplied) {
@@ -133,33 +134,31 @@ var DynaFastClick = /** @class */ (function (_super) {
             return;
         }
         this.touchApplied = false;
-        this.triggerClick();
+        this.triggerClick(event);
     };
     DynaFastClick.prototype.handleTouchStart = function () {
-        var _this = this;
         if (CONSOLE_DEBUG)
             console.debug('this.props.touchTimeout', this.props.touchTimeout);
+        this.touchCanceled = false;
         this.touchApplied = true;
-        this.touchStartTimer = setTimeout(function () {
-            _this.triggerClick();
-        }, this.props.touchTimeout);
         if (CONSOLE_DEBUG)
             console.debug('handle - start');
     };
-    DynaFastClick.prototype.handleTouchEnd = function () {
-        if (CONSOLE_DEBUG)
-            console.debug('handle - end');
-        this.touchEnded = Number(new Date);
+    DynaFastClick.prototype.handleTouchEnd = function (event) {
+        console.debug(event.changedTouches);
+        if (this.touchCanceled)
+            return;
+        this.triggerClick(event);
     };
     DynaFastClick.prototype.handleTouchMove = function () {
         if (CONSOLE_DEBUG)
             console.debug('handle - move');
-        clearTimeout(this.touchStartTimer);
+        this.touchCanceled = true;
     };
     DynaFastClick.prototype.handleTouchCancel = function () {
         if (CONSOLE_DEBUG)
             console.debug('handle - cancel');
-        clearTimeout(this.touchStartTimer);
+        this.touchCanceled = true;
     };
     DynaFastClick.prototype.render = function () {
         var _a = this.props, className = _a.className, NodeType = _a.nodeType, children = _a.children;
@@ -170,7 +169,7 @@ var DynaFastClick = /** @class */ (function (_super) {
         nodeType: "span",
         touchTimeout: 120,
         children: null,
-        onClick: function () { return undefined; },
+        onClick: function (event) { return undefined; },
     };
     return DynaFastClick;
 }(React.Component));
