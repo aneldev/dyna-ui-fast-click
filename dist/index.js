@@ -154,7 +154,6 @@ var DynaFastClick = /** @class */ (function (_super) {
     DynaFastClick.defaultProps = {
         className: "",
         nodeType: "span",
-        touchTimeout: 120,
         children: null,
         onClick: function (event) { return undefined; },
     };
