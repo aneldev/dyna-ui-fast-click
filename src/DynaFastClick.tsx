@@ -3,7 +3,6 @@ import * as React from "react";
 export interface IDynaFastClickProps {
 	className?: string;
 	nodeType?: string;
-	touchTimeout?: number; // ms
 	children: any;
 	onClick?: (event?: MouseEvent | TouchEvent) => void;
 }
@@ -12,7 +11,6 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 	static defaultProps: IDynaFastClickProps = {
 		className: "",
 		nodeType: "span",
-		touchTimeout: 120,
 		children: null,
 		onClick: (event?: MouseEvent | TouchEvent) => undefined,
 	};
