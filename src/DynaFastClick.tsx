@@ -17,6 +17,7 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 
 	constructor(props: IDynaFastClickProps) {
 		super(props);
+
 		this.handleClick = this.handleClick.bind(this);
 		this.handleTouchStart = this.handleTouchStart.bind(this);
 		this.handleTouchEnd = this.handleTouchEnd.bind(this);
@@ -24,7 +25,6 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 		this.handleTouchCancel = this.handleTouchCancel.bind(this);
 	}
 
-	private touchStartTimer: any;
 	private touchApplied: boolean = false;
 	private touchCanceled: boolean = false;
 
@@ -47,7 +47,10 @@ export class DynaFastClick extends React.Component<IDynaFastClickProps> {
 	}
 
 	private handleTouchEnd(event: TouchEvent): void {
-		if (!this.touchCanceled) this.triggerClick(event);
+		if (!this.touchCanceled) {
+			event.preventDefault();
+			this.triggerClick(event);
+		}
 	}
 
 	private handleTouchMove(): void {

@@ -138,8 +138,10 @@ var DynaFastClick = /** @class */ (function (_super) {
         this.touchApplied = true;
     };
     DynaFastClick.prototype.handleTouchEnd = function (event) {
-        if (!this.touchCanceled)
+        if (!this.touchCanceled) {
+            event.preventDefault();
             this.triggerClick(event);
+        }
     };
     DynaFastClick.prototype.handleTouchMove = function () {
         this.touchCanceled = true;
